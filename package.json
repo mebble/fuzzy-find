@@ -1,13 +1,13 @@
 {
   "name": "fuzzy-search",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Fuzzy search anything on a webpage",
   "main": "popup.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
-    "build": "parcel content.js"
+    "build": "parcel src/content-page/content.js"
   },
   "repository": {
     "type": "git",
