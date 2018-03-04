@@ -10,31 +10,42 @@ let nodesFound = [];
 let nodesIter;
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	if (request.txt) {
-		const txt = request.txt;
-		marker.unmark();
-		marker.mark(txt);
-
-		nodesFound = Array.from($$('[data-markjs="true"]'));
-		nodesIter = cyclicIterator(nodesFound);
+	if (request.newInput) {
+		resetMarks(request.newInput);
+		resetNodes();
 	}
 	if (request.jump) {
-		let currNode = nodesIter.getCurrent();
-		currNode.style.backgroundColor = '#ff0';
-
-		if (request.jump === 'next') {
-			currNode = nodesIter.getNext();
-		} else if (request.jump === 'previous') {
-			currNode = nodesIter.getPrevious();
-		}
-		scrollToElement(currNode, {
-			offset: 0,
-			ease: 'linear',
-			duration: 100
-		});
-		currNode.style.backgroundColor = '#ff9696';
+		jump(request.jump);
 	}
 });
+
+function resetMarks(text) {
+	marker.unmark();
+	marker.mark(text);
+}
+
+function resetNodes() {
+	nodesFound = Array.from($$('[data-markjs="true"]'));
+	nodesIter = cyclicIterator(nodesFound);
+}
+
+function jump(jumpWhere) {
+	let currNode = nodesIter.getCurrent();
+	currNode.style.backgroundColor = '#ff0';  // color reset
+
+	if (jumpWhere === 'next') {
+		currNode = nodesIter.getNext();
+	} else if (jumpWhere === 'previous') {
+		currNode = nodesIter.getPrevious();
+	}
+
+	scrollToElement(currNode, {
+		offset: 0,
+		ease: 'linear',
+		duration: 100
+	});
+	currNode.style.backgroundColor = '#ff9696';
+}
 
 function cyclicIterator(array) {
     var index = 0;

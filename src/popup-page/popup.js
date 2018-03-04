@@ -1,12 +1,9 @@
 const $ = (selector) => document.querySelector(selector);
 
 $('#textInput').addEventListener('input', function(event) {
-	const message = {
-		txt: this.value
-	};
+	const message = { newInput: this.value };
 	sendMessage(message);
 });
-
 
 $('#nextBtn').addEventListener('click', function(event) {
 	sendMessage({ jump: 'next' });
