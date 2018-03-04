@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "fuzzy-find",
   "description": "Fuzzy search anything on a webpage",
-  "version": "0.0.1",
+  "version": "0.1.2",
   "browser_action": {
     "default_icon": "assets/icon.png",
     "default_popup": "src/popup-page/popup.html",
