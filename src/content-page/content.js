@@ -1,8 +1,6 @@
 import Mark from 'mark.js';
 import scrollToElement from 'scroll-to-element';
-
-const $ = (selector) => document.querySelector(selector);
-const $$ = (selector) => document.querySelectorAll(selector);
+import { $, $$, cyclicIterator } from './util';
 
 const marker = new Mark(document.body);
 
@@ -46,26 +44,3 @@ function jump(jumpWhere) {
 	});
 	currNode.style.backgroundColor = '#ff9696';
 }
-
-function cyclicIterator(array) {
-    var index = 0;
-    var copy = array.slice(0);
-
-    return {
-        getCurrent: function () {
-            return copy[index];
-        },
-
-        getNext: function () {
-            index = ++index % copy.length;
-            return this.getCurrent();
-        },
-
-        getPrevious: function () {
-            if(--index < 0) {
-              index += copy.length;
-            }
-            return this.getCurrent();
-        }
-    };
-};
