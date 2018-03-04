@@ -1,0 +1,31 @@
+{
+  "name": "fuzzy-search",
+  "version": "0.0.1",
+  "description": "Fuzzy search anything on a webpage",
+  "main": "popup.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mebble/fuzzy-find.git"
+  },
+  "keywords": [
+    "search",
+    "fuzzy",
+    "finder",
+    "highlighter"
+  ],
+  "author": "Neil Syiemlieh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mebble/fuzzy-find/issues"
+  },
+  "homepage": "https://github.com/mebble/fuzzy-find#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.6.2"
+  }
+}
