@@ -1,24 +1,21 @@
-const $ = (selector) => document.querySelector(selector);
+const $ = sel => document.querySelector(sel);
 
-$('#textInput').addEventListener('input', function(event) {
-	const message = { newInput: this.value };
-	sendMessage(message);
-});
-
-$('#nextBtn').addEventListener('click', function(event) {
-	sendMessage({ jump: 'next' });
-});
-
-$('#prevBtn').addEventListener('click', function(event) {
-	sendMessage({ jump: 'previous' });
-});
-
-function sendMessage(message) {
-	const params = {
-		active: true,
-		currentWindow: true
-	};
-	chrome.tabs.query(params, (tabs) => {
-		chrome.tabs.sendMessage(tabs[0].id, message);
+$('#search-input').addEventListener('input', function(event) {
+	chrome.bookmarks.getTree(treeNodes => {
+		const bookmarks = treeNodes[0]
+			.children
+			.find(child => child.title === 'Bookmarks bar')
+			.children;
+		console.log(bookmarks);
 	});
-}
+});
+
+// function sendMessage(message) {
+// 	const params = {
+// 		active: true,
+// 		currentWindow: true
+// 	};
+// 	chrome.tabs.query(params, (tabs) => {
+// 		chrome.tabs.sendMessage(tabs[0].id, message);
+// 	});
+// }
