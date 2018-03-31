@@ -6,7 +6,7 @@ $('#search-input').on('input', function(event) {
 			const resElem = `
 				<div>
 					<h3>${res.title}</h3>
-					<p>${res.url}</p
+					<p>${res.url}</p>
 				</div>
 			`;
 			return $(resElem);
