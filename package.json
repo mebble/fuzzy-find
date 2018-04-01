@@ -1,6 +1,6 @@
 {
   "name": "fuzzy-search",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Fuzzy search anything on a webpage",
   "main": "popup.js",
   "directories": {
