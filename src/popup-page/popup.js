@@ -36,6 +36,7 @@ function displayResults(results, location) {
 	/**
 	 * @param {Array.<BookmarkTreeNode>} results - The BookmarkTreeNodes to render in the UI
 	 * @param {string} location - The CSS selector of the UI container in which to render
+	 * @requires module:jquery
 	 */
 	$(location).empty();
 	const resultNodes = results.map(res => {
@@ -72,7 +73,7 @@ function flattenArray(arr) {
 
 function initNodePaths(parent, parentPath) {
 	/**
-	 * Create a path attribute for every child node in the tree whose root is @parent
+	 * Recursively create a path attribute for every child node in the tree whose root is @parent
 	 * @param {BookmarkTreeNode} parent - The node whose path will be given to its children
 	 * @param {string} parentPath - The path to give to
 	 */
