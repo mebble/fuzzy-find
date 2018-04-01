@@ -4,7 +4,7 @@
   "description": "Fuzzy search anything on a webpage",
   "main": "popup.js",
   "directories": {
-    "lib": "src/popup-page/lib"
+    "lib": "src/lib"
   },
   "repository": {
     "type": "git",
