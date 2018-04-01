@@ -16,17 +16,7 @@ chrome.bookmarks.getTree(results => {
 		.children
 		.find(child => child.title === 'Bookmarks bar')
 		.children;
-	while (bookmarks.some(b => b.hasOwnProperty('children'))) {
-		// flatten the bookmarks tree
-		bookmarks = bookmarks.reduce((acc, curr) => {
-			if (curr.hasOwnProperty('children')) {
-				return acc.concat(curr.children);
-			} else {
-				return acc.concat([curr]);
-			}
-		}, []);
-	}
-	flattenedBookmarks = bookmarks;
+	flattenedBookmarks = flattenTree(bookmarks);
 	fuse = new Fuse(flattenedBookmarks, fuseOptions);
 });
 
@@ -40,6 +30,7 @@ $('#search-input').on('input', function(event) {
 		$('body').removeClass('res-present');
 	}
 	displayResults(results, '.results-box');
+	console.log(results);
 });
 
 function displayResults(results, location) {
@@ -53,4 +44,18 @@ function displayResults(results, location) {
 		return $(resElem);
 	});
 	$(location).append(resultNodes);
+}
+
+function flattenTree(rootNode) {
+	let tempPtr = rootNode;
+	while (tempPtr.some(node => node.hasOwnProperty('children'))) {
+		tempPtr = tempPtr.reduce((acc, curr) => {
+			if (curr.hasOwnProperty('children')) {
+				return acc.concat(curr.children);
+			} else {
+				return acc.concat([curr]);
+			}
+		}, []);
+	}
+	return tempPtr;
 }
