@@ -19,3 +19,21 @@ $('#search-input').on('input', function(event) {
 		$('.results-box').append(resultNodes);
 	});
 });
+
+$('#btn-flatten').on('click', function(event) {
+	chrome.bookmarks.getTree(function(results) {
+		const bookmarks = results[0]
+			.children
+			.find(child => child.title === 'Bookmarks bar')
+			.children;
+		console.log(bookmarks);
+		const reduced = bookmarks.reduce((acc, curr) => {
+			if (curr.hasOwnProperty('children')) {
+				return acc.concat(curr.children);
+			} else {
+				return acc;
+			}
+		}, []);
+		console.log(reduced);
+	});
+});
