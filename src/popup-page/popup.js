@@ -7,23 +7,17 @@ const fuseOptions = {
 	minMatchCharLength: 1,
 	shouldSort: true
 };
-let flattenedBookmarks = [];
+let bookmarksList = [];
 let fuse;
 
 // initialise Fuse instance
 chrome.bookmarks.getTree(results => {
-	let bookmarks = results[0]
+	let bookmarksBar = results[0]
 		.children
-		.find(child => child.title === 'Bookmarks bar')
-		.children;
-	bookmarks.forEach(b => {
-		b.path = `root/${b.title}`;
-		if (b.hasOwnProperty('children')) {
-			initNodePaths(b);
-		}
-	});
-	flattenedBookmarks = flattenTree(bookmarks);
-	fuse = new Fuse(flattenedBookmarks, fuseOptions);
+		.find(child => child.title === 'Bookmarks bar');
+	initNodePaths(bookmarksBar, 'bookmarks-bar');
+	bookmarksList = flattenArray(bookmarksBar.children);
+	fuse = new Fuse(bookmarksList, fuseOptions);
 });
 
 $('#search-input').on('input', function(event) {
@@ -36,7 +30,6 @@ $('#search-input').on('input', function(event) {
 		$('body').removeClass('res-present');
 	}
 	displayResults(results, '.results-box');
-	console.log(results);
 });
 
 function displayResults(results, location) {
@@ -52,8 +45,8 @@ function displayResults(results, location) {
 	$(location).append(resultNodes);
 }
 
-function flattenTree(rootNode) {
-	let tempPtr = rootNode;
+function flattenArray(arr) {
+	let tempPtr = arr;
 	while (tempPtr.some(node => node.hasOwnProperty('children'))) {
 		tempPtr = tempPtr.reduce((acc, curr) => {
 			if (curr.hasOwnProperty('children')) {
@@ -66,11 +59,11 @@ function flattenTree(rootNode) {
 	return tempPtr;
 }
 
-function initNodePaths(root) {
+function initNodePaths(root, rootPath) {
 	root.children.forEach(child => {
-		child.path = `${root.path}/${child.title}`;
+		child.path = `${rootPath}/${child.title}`;
 		if (child.hasOwnProperty('children')) {
-			initNodePaths(child);
+			initNodePaths(child, child.path);
 		}
 	});
 }
