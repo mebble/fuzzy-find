@@ -38,6 +38,7 @@ function displayResults(results, location) {
 		const resElem = `
 			<div>
 				<h3><a href="${res.url}" target="_blank">${res.title}</a></h3>
+				<p>${res.path}</p>
 			</div>
 		`;
 		return $(resElem);
@@ -59,10 +60,11 @@ function flattenArray(arr) {
 	return tempPtr;
 }
 
-function initNodePaths(root, rootPath) {
-	root.children.forEach(child => {
-		child.path = `${rootPath}/${child.title}`;
+function initNodePaths(parent, parentPath) {
+	parent.children.forEach(child => {
+		child.path = parentPath;
 		if (child.hasOwnProperty('children')) {
+			child.path += `/${child.title}`
 			initNodePaths(child, child.path);
 		}
 	});
