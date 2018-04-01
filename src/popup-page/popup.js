@@ -31,7 +31,7 @@ $('#btn-flatten').on('click', function(event) {
 			if (curr.hasOwnProperty('children')) {
 				return acc.concat(curr.children);
 			} else {
-				return acc;
+				return acc.concat([curr]);
 			}
 		}, []);
 		console.log(reduced);
