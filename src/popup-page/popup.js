@@ -22,18 +22,20 @@ $('#search-input').on('input', function(event) {
 
 $('#btn-flatten').on('click', function(event) {
 	chrome.bookmarks.getTree(function(results) {
-		const bookmarks = results[0]
+		let bookmarks = results[0]
 			.children
 			.find(child => child.title === 'Bookmarks bar')
 			.children;
 		console.log(bookmarks);
-		const reduced = bookmarks.reduce((acc, curr) => {
-			if (curr.hasOwnProperty('children')) {
-				return acc.concat(curr.children);
-			} else {
-				return acc.concat([curr]);
-			}
-		}, []);
-		console.log(reduced);
+		while (bookmarks.some(b => b.hasOwnProperty('children'))) {
+			bookmarks = bookmarks.reduce((acc, curr) => {
+				if (curr.hasOwnProperty('children')) {
+					return acc.concat(curr.children);
+				} else {
+					return acc.concat([curr]);
+				}
+			}, []);
+		}
+		console.log(bookmarks);  // flattened tree
 	});
 });
