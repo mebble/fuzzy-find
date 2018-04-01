@@ -16,6 +16,12 @@ chrome.bookmarks.getTree(results => {
 		.children
 		.find(child => child.title === 'Bookmarks bar')
 		.children;
+	bookmarks.forEach(b => {
+		b.path = `root/${b.title}`;
+		if (b.hasOwnProperty('children')) {
+			initNodePaths(b);
+		}
+	});
 	flattenedBookmarks = flattenTree(bookmarks);
 	fuse = new Fuse(flattenedBookmarks, fuseOptions);
 });
@@ -58,4 +64,13 @@ function flattenTree(rootNode) {
 		}, []);
 	}
 	return tempPtr;
+}
+
+function initNodePaths(root) {
+	root.children.forEach(child => {
+		child.path = `${root.path}/${child.title}`;
+		if (child.hasOwnProperty('children')) {
+			initNodePaths(child);
+		}
+	});
 }
