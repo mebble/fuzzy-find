@@ -12,7 +12,7 @@ let fuse;
 
 // initialise Fuse instance
 chrome.bookmarks.getTree(results => {
-	let bookmarksBar = results[0]
+	const bookmarksBar = results[0]
 		.children
 		.find(child => child.title === 'Bookmarks bar');
 	initNodePaths(bookmarksBar, 'bookmarks-bar');
@@ -33,6 +33,10 @@ $('#search-input').on('input', function(event) {
 });
 
 function displayResults(results, location) {
+	/**
+	 * @param {Array.<BookmarkTreeNode>} results - The BookmarkTreeNodes to render in the UI
+	 * @param {string} location - The CSS selector of the UI container in which to render
+	 */
 	$(location).empty();
 	const resultNodes = results.map(res => {
 		const resElem = `
@@ -47,6 +51,12 @@ function displayResults(results, location) {
 }
 
 function flattenArray(arr) {
+	/**
+	 * Return a flattened array without any children
+	 * @param {Array.<BookmarkTreeNode>} arr - BookmarkTreeNodes with children
+	 * @param {Array.<BookmarkTreeNode>} arr.children - BookmarkTreeNodes with children
+	 * @returns {Array.<BookmarkTreeNode>}
+	 */
 	let tempPtr = arr;
 	while (tempPtr.some(node => node.hasOwnProperty('children'))) {
 		tempPtr = tempPtr.reduce((acc, curr) => {
@@ -61,6 +71,11 @@ function flattenArray(arr) {
 }
 
 function initNodePaths(parent, parentPath) {
+	/**
+	 * Create a path attribute for every child node in the tree whose root is @parent
+	 * @param {BookmarkTreeNode} parent - The node whose path will be given to its children
+	 * @param {string} parentPath - The path to give to
+	 */
 	parent.children.forEach(child => {
 		child.path = parentPath;
 		if (child.hasOwnProperty('children')) {
