@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "fuzzy-find",
   "description": "Fuzzy search your bookmarks",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "browser_action": {
     "default_icon": "assets/icon.png",
     "default_popup": "src/popup-page/popup.html",

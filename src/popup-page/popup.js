@@ -1,5 +1,5 @@
 const fuseOptions = {
-	keys: ['title', 'url'],
+	keys: ['title', 'url', 'path'],
 	threshold: 0.6,
 	location: 0,
 	distance: 100,
