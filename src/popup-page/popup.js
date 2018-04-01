@@ -6,17 +6,7 @@ $('#search-input').on('input', function(event) {
 		} else {
 			$('body').removeClass('res-present');
 		}
-
-		$('.results-box').empty();
-		const resultNodes = results.map(res => {
-			const resElem = `
-				<div>
-					<h3><a href="${res.url}" target="_blank">${res.title}</a></h3>
-				</div>
-			`;
-			return $(resElem);
-		});
-		$('.results-box').append(resultNodes);
+		displayResults(results, '.results-box');
 	});
 });
 
@@ -26,8 +16,8 @@ $('#btn-flatten').on('click', function(event) {
 			.children
 			.find(child => child.title === 'Bookmarks bar')
 			.children;
-		console.log(bookmarks);
 		while (bookmarks.some(b => b.hasOwnProperty('children'))) {
+			// flatten the bookmarks tree
 			bookmarks = bookmarks.reduce((acc, curr) => {
 				if (curr.hasOwnProperty('children')) {
 					return acc.concat(curr.children);
@@ -36,6 +26,20 @@ $('#btn-flatten').on('click', function(event) {
 				}
 			}, []);
 		}
-		console.log(bookmarks);  // flattened tree
+		$('body').addClass('res-present');
+		displayResults(bookmarks, '.results-box');
 	});
 });
+
+function displayResults(results, location) {
+	$(location).empty();
+	const resultNodes = results.map(res => {
+		const resElem = `
+			<div>
+				<h3><a href="${res.url}" target="_blank">${res.title}</a></h3>
+			</div>
+		`;
+		return $(resElem);
+	});
+	$(location).append(resultNodes);
+}
