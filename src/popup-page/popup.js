@@ -41,13 +41,13 @@ function displayResults(results, location) {
 	$(location).empty();
 	const resultNodes = results.map(res => {
 		const resElem = `
-			<div class="list-group">
+			<div class="list-group search-item">
 				<a href="${res.url}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
 					<div class="d-flex w-100 justify-content-between">
-						<h6 class="font-weight-bold">${res.title}</h6>
+						<h6 class="font-weight-bold title">${res.title}</h6>
 						<small>${res.id}</small>
 					</div>
-					<small class="text-muted">${res.path}</small>
+					<small class="text-muted path">${res.path}</small>
 				</a>
 			</div>
 		`;
