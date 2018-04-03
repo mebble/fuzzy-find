@@ -41,7 +41,7 @@ function displayResults(results, location) {
 	$(location).empty();
 	const resultNodes = results.map(res => {
 		const resElem = `
-			<div class="list-group search-item">
+			<div class="list-group search-item" data-toggle="tooltip" data-placement="top" title="${res.url}">
 				<a href="${res.url}" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start">
 					<div class="d-flex w-100 justify-content-between">
 						<h6 class="font-weight-bold title">${res.title}</h6>
