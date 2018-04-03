@@ -8,18 +8,17 @@
 	<link rel="stylesheet" href="../styles/bootstrap-grid.min.css">
 	<link rel="stylesheet" href="../styles/bootstrap.min.css">
 	<style>
-		body.res-present {
-			width: 300px;
+		body {
+			width: 400px;
 		}
 	</style>
 </head>
 <body>
-	<form>
-		<label>
-			Look for:
-			<input id="search-input" type="text" name="bookmark-query">
-		</label>
-	</form>
+	<nav class="navbar sticky-top">
+		<div class="input-group input-group-sm">
+			<input class="form-control" id="search-input" type="text" placeholder="Find your bookmark..." name="bookmark-query">
+		</div>
+	</nav>
 	<div class="results-box">
 	</div>
 	<script src="../lib/jquery-3.3.1.min.js"></script>
