@@ -1,0 +1,28 @@
+body {
+    width: 400px;
+}
+.search-item {
+    margin: 5px 5px;
+}
+.search-item .title {
+    font-size: 14px;
+}
+.search-item .path {
+    font-size: 12px;
+}
+footer {
+    text-align: center;
+    margin-bottom: 5px;
+}
+a {
+    color: black;
+}
+
+.about.container {
+    padding: 10px;
+    font-family: monospace;
+}
+.about .row {
+    text-align: center;
+    padding: 5px;
+}
